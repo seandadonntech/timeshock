@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Time Zones</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: grid;
+      place-items: center; /* Centers content horizontally and vertically */
+      height: 50vh; /* Full viewport height */
+      margin: 15px; /* Remove default margin */
+      
+    }
+    #city-select {
+      text-align: center;
+      width: 200px;
+      height: 90px;
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid #601414;
+      border-radius: 5px;
+      
+    }
+    #city-select option {
+      padding: 10px;
+      text-align: center;
+      
+    }
+    #time-display {
+      text-align: center;
+      font-size: 24px;
+      font-weight: lighter;
+      margin-top: 20px;
+      color: #21ab1c;
+    }
+    h1{
+      text-align: center;}
+  </style>
+</head>
+<body>
+  <h1>City Time Zones</h1>
+  <select id="city-select" title="Select a city">
+    <option value="America/New_York">New York (America/New_York)</option>
+    <option value="America/Los_Angeles">Los Angeles (America/Los_Angeles)</option>
+    <option value="America/Chicago">Chicago (America/Chicago)</option>
+    <option value="Europe/London">London (Europe/London)</option>
+    <option value="Europe/Paris">Paris (Europe/Paris)</option>
+    <option value="Asia/Tokyo">Tokyo (Asia/Tokyo)</option>
+    <option value="Australia/Sydney">Sydney (Australia/Sydney)</option>
+  </select>
+  <div id="time-display"></div>
+  
+  <script>
+    const citySelect = document.getElementById('city-select');
+    const timeDisplay = document.getElementById('time-display');
+
+    function updateTime() {
+      const timeZone = citySelect.value;
+      const currentTime = new Date();
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      const formattedTime = formatter.format(currentTime);
+      timeDisplay.innerText = `Current time in ${citySelect.options[citySelect.selectedIndex].textContent.split(' (')[0]}: ${formattedTime}`;
+    }
+
+    citySelect.addEventListener('change', updateTime);
+
+   
+    updateTime();
+  </script>
+</body>
+</html>

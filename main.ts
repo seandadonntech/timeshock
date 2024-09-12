@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 
 rl.question('Enter city: ', (answer) => {
   console.log(`You entered: ${answer}`);
-  const zdt = ZonedDateTime.now(ZoneId.of(`${answer}`));
+ const zdt = ZonedDateTime.now(ZoneId.of(answer));
   console.log(zdt);
   rl.close();
 
